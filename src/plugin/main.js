@@ -26,4 +26,11 @@ export default class CustomPlugin extends Phaser.Plugins.ScenePlugin {
             this.nextCount = this.countDelay;
         }
     }
+    setDelay(delay){
+        this.countDelay = delay;
+    }
+    reset() {
+        this.counter = 0;
+        this.text.setText(0);
+    }
 }
