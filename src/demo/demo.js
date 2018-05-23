@@ -8,8 +8,6 @@ export default class Demo extends Phaser.Scene {
     }
     
     create() {
-        const text = this.add.text(100, 200, 'Phaser', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00' });
-        this.customPlugin.init(text);
         new datGuiSetup(this.customPlugin);
     }
     

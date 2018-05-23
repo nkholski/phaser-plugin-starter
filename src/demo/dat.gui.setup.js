@@ -11,15 +11,18 @@ export default class datGuiSetup extends dat.GUI {
     }
 
     makeFolders() {
-        /// GLOBAL
-        let folder = this.addFolder('Global');
-        let f = folder.add(this.settings, 'delay', 0, 2000)
+        /// SETTINGS
+        let folder = this.addFolder('Settings');
+        folder.add(this.settings, 'delay', 0, 2000)
             .onChange((value) => {
                 this.plugin.setDelay(value);
             });
+        folder.add(this.plugin, 'active');
+
         /// STATS
         folder = this.addFolder('Stats');
         folder.add(this.plugin, 'counter', 0, 100).step(1).listen();
+        
         /// A BUTTON
         this.add(this.plugin, 'reset');
     }
