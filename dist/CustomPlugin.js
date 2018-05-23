@@ -106,33 +106,138 @@ var CustomPlugin = function (_Phaser$Plugins$Scene) {
 
         var _this = _possibleConstructorReturn(this, (CustomPlugin.__proto__ || Object.getPrototypeOf(CustomPlugin)).call(this, scene, pluginManager));
 
+        _this.scene = scene;
         _this.counter = 0;
-        _this.countDelay = 1000;
+        _this.countDelay = 300;
         _this.nextCount = 0;
         _this.textObject = null;
+        _this.active = true;
         return _this;
     }
+
+    //  Called when the Plugin is booted by the PluginManager.
+    //  If you need to reference other systems in the Scene (like the Loader or DisplayList) then set-up those references now, not in the constructor.
+
 
     _createClass(CustomPlugin, [{
         key: 'boot',
         value: function boot() {
             var eventEmitter = this.systems.events;
             eventEmitter.on('update', this.update, this);
+            this.text = this.scene.add.text(100, 200, 'Phaser', {
+                fontFamily: 'Arial',
+                fontSize: 64,
+                color: '#00ff00'
+            });
+
+            /* 
+                List of unused eventEmitters to activate matching methods of this plugin
+            */
+
+            //eventEmitter.on('start', this.start, this);
+
+            //eventEmitter.on('preupdate', this.preUpdate, this);
+            //eventEmitter.on('postupdate', this.postUpdate, this);
+
+            //eventEmitter.on('pause', this.pause, this);
+            //eventEmitter.on('resume', this.resume, this);
+
+            //eventEmitter.on('sleep', this.sleep, this);
+            //eventEmitter.on('wake', this.wake, this);
+
+            //eventEmitter.on('shutdown', this.shutdown, this);
+            //eventEmitter.on('destroy', this.destroy, this);*/
         }
+
+        //  Called when a Scene is started by the SceneManager. The Scene is now active, visible and running.
+
     }, {
-        key: 'init',
-        value: function init(textObject) {
-            this.textObject = textObject;
-        }
+        key: 'start',
+        value: function start() {}
+
+        //  Called every Scene step - phase 1
+
+    }, {
+        key: 'preUpdate',
+        value: function preUpdate(time, delta) {}
+
+        //  Called every Scene step - phase 2
+
     }, {
         key: 'update',
         value: function update(time, delta) {
-            if (!this.textObject) {
+            if (!this.active) {
                 return;
             }
             if ((this.nextCount -= delta) < 0) {
-                this.counter++;
+                if (++this.counter > 99) {
+                    this.counter = 0;
+                }
+                this.text.setText(this.counter);
+                this.nextCount = this.countDelay;
             }
+        }
+
+        //  Called every Scene step - phase 3
+
+    }, {
+        key: 'postUpdate',
+        value: function postUpdate(time, delta) {}
+
+        //  Called when a Scene is paused. A paused scene doesn't have its Step run, but still renders.
+
+    }, {
+        key: 'pause',
+        value: function pause() {}
+
+        //  Called when a Scene is resumed from a paused state.
+
+    }, {
+        key: 'resume',
+        value: function resume() {}
+
+        //  Called when a Scene is put to sleep. A sleeping scene doesn't update or render, but isn't destroyed or shutdown. preUpdate events still fire.
+
+    }, {
+        key: 'sleep',
+        value: function sleep() {}
+
+        //  Called when a Scene is woken from a sleeping state.
+
+    }, {
+        key: 'wake',
+        value: function wake() {}
+
+        //  Called when a Scene shuts down, it may then come back again later (which will invoke the 'start' event) but should be considered dormant.
+
+    }, {
+        key: 'shutdown',
+        value: function shutdown() {}
+
+        //  Called when a Scene is destroyed by the Scene Manager. There is no coming back from a destroyed Scene, so clear up all resources here.
+
+    }, {
+        key: 'destroy',
+        value: function destroy() {
+            this.shutdown();
+            this.scene = undefined;
+        }
+
+        //  Custom method for this plugin
+
+    }, {
+        key: 'setDelay',
+        value: function setDelay(delay) {
+            this.countDelay = delay;
+        }
+
+        //  Custom method for this plugin
+
+    }, {
+        key: 'reset',
+        value: function reset() {
+            this.counter = 0;
+            this.text.setText(0);
         }
     }]);
 
@@ -144,3 +249,4 @@ exports.default = CustomPlugin;
 /***/ })
 /******/ ]);
 });
+//# sourceMappingURL=CustomPlugin.min.map

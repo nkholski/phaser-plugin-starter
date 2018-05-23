@@ -18,7 +18,8 @@ module.exports = {
         filename: '[name].js',
         library: 'CustomPlugin',
         libraryTarget: 'umd',
-        umdNamedDefine: true
+        umdNamedDefine: true,
+        sourceMapFilename: 'CustomPlugin.min.map'
     },
 
     plugins: [
@@ -53,5 +54,7 @@ module.exports = {
     },
     optimization: {
         minimize: false // Let Uglify do this job for min-build only
-    }
+    },
+    devtool: 'source-map',
+
 };
