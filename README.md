@@ -1,6 +1,8 @@
 # Plugin Starter Kit for Phaser
 
-A webpack 4 build environment for creating Plugins for Phaser 3.8.0+ with ES6 support, demo app with dat.gui integration and a build script. Check my Grid Physics and Animated Tiles plugins for more complex examples.
+A webpack 4 build environment for creating Plugins for Phaser 3.8.0+ with ES6 support, demo app with dat.gui integration and a build script. Check my [Grid Physics](https://github.com/nkholski/phaser-grid-physics) and [Animated Tiles](https://github.com/nkholski/phaser-animated-tiles) plugins for more complex examples.
+
+Official forum thread at [HTML5GameDevs](http://www.html5gamedevs.com/topic/37865-phaser-plugin-starter/)
 
 ## Why making a plugin is a great idea
 Games are complex undertakings and being able to decouple and split up code become more crucial when a project grows. By making a plugin you may extract a part of your project into a separate side project. You may see it as a sub-goal to achieve and then tuck it away and keep it separate from the rest of the code base. If your project fail, which is what happens to most of my projects as a hobbyist, you can bring your plugins to other projects and at least get some feeling of satisfaction :-).
@@ -16,3 +18,6 @@ The plugin is bundled with a demo which is used for testing during development. 
 ## Build plugin
 Build the plugin including minified version. Targets the dist folder.
 `npm run build`
+
+## Contribute
+Feedback and suggestions are very welcome.
